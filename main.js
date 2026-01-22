@@ -10,7 +10,6 @@ const { router } = require('./userRoutes');
 const app = express();
 const PORT = process.env.PORT;
 
-// Enable CORS for React frontend
 app.use(cors({
   origin: process.env.FRONTEND_URL || 'http://localhost:3000',
   credentials: true
