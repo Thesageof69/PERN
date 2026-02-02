@@ -1,20 +1,31 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-  await axios.post("http://localhost:4000/login", { email, password }, { withCredentials: true });
-  alert("Login successful!");
-} catch (err) {
-  alert(err.response?.data?.message || "Login failed");
-}
+      await axios.post(
+        "http://localhost:4000/login",
+        { email, password },
+        { withCredentials: true }
+      );
+
+      
+      localStorage.setItem("isAuthenticated", "true");
+
+      
+      navigate("/profile");
+    } catch (err) {
+      alert(err.response?.data?.message || "Login failed");
+    }
   };
+
 
   return (
     <div className="auth-container">

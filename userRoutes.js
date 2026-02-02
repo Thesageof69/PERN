@@ -26,6 +26,13 @@ const {
 
 router.post('/register', registerUser);
 router.post('/login', loginUser);
+router.post('/logout', (req, res) => {
+  res
+    .clearCookie('token', { httpOnly: true })
+    .status(200)
+    .json({ success: true, message: 'Logged out successfully' });
+});
+
 router.get('/users', auth, listUsers);
 router.get('/profile', auth, getProfile);
 router.put('/profile', auth, updateProfile);
